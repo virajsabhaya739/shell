@@ -1,5 +1,6 @@
 import sys
 
+valid_cs = []
 
 def main():
     # Uncomment this block to pass the first stage
@@ -8,8 +9,9 @@ def main():
 
     # Wait for user input
     command = input()
-    print(f"{command}: command not found")
-
+    if command not in valid_cs:
+        print(f"{command}: command not found")
+    main()
 
 if __name__ == "__main__":
     main()
