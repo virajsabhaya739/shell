@@ -18,8 +18,21 @@ def main():
 
         if cmd_split[0] not in valid_cs:
             command_not_found(command_full)
+        elif cmd_split[0] == "exit":
+            # handle exit commands
+            handle_exit_command(cmd_split, command_full)
         else:
             command_not_found(command_full)
+
+
+def handle_exit_command(cmd_split: list, cmd_full: str) -> None:
+    if len(cmd_split) > 1:
+        if cmd_split[1] == "0":
+            exit()
+        else:
+            command_not_recognaized(cmd_full)
+    else:
+        command_not_found(cmd_full)
 
 
 def command_not_found(cmd: str) -> None:
