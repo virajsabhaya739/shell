@@ -23,8 +23,20 @@ def main():
             handle_exit_command(cmd_split, command_full)
         elif cmd_split[0] == 'echo':
             handle_echo_command(cmd_split, command_full)
+        elif cmd_split[0] == 'type':
+            handle_type_command(cmd_split, command_full)
         else:
             command_not_found(command_full)
+
+
+def handle_type_command(cmd_split: list, cmd_full: str) -> None:
+    if len(cmd_split) > 1:
+        if cmd_split[1] in valid_cs:
+            print(f"{cmd_split[1]} is a shell builtin")
+        else:
+            print(f"{cmd_split[1]}: not found")
+    else:
+        command_not_found(cmd_full)
 
 
 def handle_echo_command(cmd_split: list, cmd_full: str) -> None:
