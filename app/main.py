@@ -21,8 +21,18 @@ def main():
         elif cmd_split[0] == "exit":
             # handle exit commands
             handle_exit_command(cmd_split, command_full)
+        elif cmd_split[0] == 'echo':
+            handle_echo_command(cmd_split, command_full)
         else:
             command_not_found(command_full)
+
+
+def handle_echo_command(cmd_split: list, cmd_full: str) -> None:
+    if len(cmd_split) > 1:
+        plain_cmd = cmd_full.replace('"', "").replace("'", "")
+        print(plain_cmd[len(cmd_split[0]) + 1:])
+    else:
+        command_not_found(cmd_full)
 
 
 def handle_exit_command(cmd_split: list, cmd_full: str) -> None:
