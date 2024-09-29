@@ -24,17 +24,25 @@ def main():
         elif cmd_split[0] == 'echo':
             handle_echo_command(cmd_split, command_full)
         elif cmd_split[0] == 'type':
-            handle_type_command(cmd_split, command_full)
+            handle_type_command(cmd_split, command_full, PATH)
         else:
             command_not_found(command_full)
 
 
-def handle_type_command(cmd_split: list, cmd_full: str) -> None:
+def handle_type_command(cmd_split: list, cmd_full: str, path: str) -> None:
     if len(cmd_split) > 1:
-        if cmd_split[1] in valid_cs:
-            print(f"{cmd_split[1]} is a shell builtin")
-        else:
-            print(f"{cmd_split[1]}: not found")
+        is_found = False
+        paths = path.split(":")
+        for path in paths:
+            if os.path.isfile(f"{path}/{cmd_split[1]}"):
+                print(f"{cmd_split[1]} is {path}/{cmd_split[1]}")
+                is_found = True
+                break
+        if not is_found:
+            if cmd_split[1] in valid_cs:
+                print(f"{cmd_split[1]} is a shell builtin")
+            else:
+                print(f"{cmd_split[1]}: not found")
     else:
         command_not_found(cmd_full)
 
